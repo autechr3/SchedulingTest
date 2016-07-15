@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Hangfire;
 
@@ -6,6 +7,8 @@ namespace SchedulingTest
 {
     internal class Program
     {
+        protected static object Locker = new object();
+
         private static void Main(string[] args)
         {
             GlobalConfiguration.Configuration.UseSqlServerStorage(
@@ -28,7 +31,10 @@ namespace SchedulingTest
         {
             var now = DateTime.Now;
             var machineName = Environment.MachineName;
-            Console.WriteLine($"Yo! {machineName} -- {now}");
+            lock (Locker)
+            {
+                File.AppendAllText("C:\\hangfire.txt", $"Yo! {machineName} -- {now}{Environment.NewLine}");
+            }
         }
     }
 }
