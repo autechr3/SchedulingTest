@@ -9,7 +9,7 @@ namespace SchedulingTest
         private static void Main(string[] args)
         {
             GlobalConfiguration.Configuration.UseSqlServerStorage(
-                "Data Source=(local);Initial Catalog=HangfireTest;User Id=hangfire;Password=Hang_fire;");
+                "Data Source=WUSMG185230-TJ1;Initial Catalog=HangfireTest;User Id=hangfire;Password=Hang_fire;");
 
             using (var server = new BackgroundJobServer())
             {
